@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(title)"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title th:text="${title} + ' · Corporate Admin'">Corporate Admin</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body>
+<aside th:fragment="sidebar" class="sidebar">
+  <a class="brand" th:href="@{/}"><span class="brand-icon">C</span> CORP<span class="brand-light"> / ADMIN</span></a>
+  <div class="workspace">КОРПОРАТИВНЫЙ СЕРВИС<span>Управление доступом</span></div>
+  <nav aria-label="Главная навигация">
+    <a th:href="@{/}">◈ <span>Обзор</span></a>
+    <a th:href="@{/users}" sec:authorize="hasAuthority('USER_READ')">◎ <span>Пользователи</span></a>
+    <a th:href="@{/roles}" sec:authorize="hasAuthority('ROLE_READ')">▦ <span>Роли и права</span></a>
+    <a th:href="@{/audit}" sec:authorize="hasAuthority('AUDIT_READ')">≡ <span>Журнал действий</span></a>
+  </nav>
+  <div class="sidebar-bottom"><span class="status-dot"></span> Защищённая сессия<div class="signed-in" sec:authentication="name">admin</div><form th:action="@{/logout}" method="post"><button class="logout" type="submit">Выйти из аккаунта ↗</button></form></div>
+</aside>
+<header th:fragment="header(section)" class="topbar"><span>Рабочее пространство <b>/</b> <strong th:text="${section}">Обзор</strong></span><span class="badge">RBAC · управление доступом</span></header>
+<div th:fragment="flash" th:if="${success}" class="notice" role="status" th:text="${success}"></div>
+</body></html>

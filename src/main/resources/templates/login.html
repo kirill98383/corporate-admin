@@ -1,0 +1,4 @@
+<!DOCTYPE html><html lang="ru" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{fragments :: head('Вход')}"></head>
+<body class="login-page"><main class="login-card"><div class="eyebrow">CORP / ADMIN</div><h1>С возвращением.</h1><p class="muted">Войдите для управления корпоративным сервисом.</p>
+<div class="notice danger" th:if="${param.error}">Неверный логин, пароль или аккаунт отключён.</div><div class="notice" th:if="${param.logout}">Вы вышли из системы.</div><div class="notice" th:if="${param.expired}">Сессия завершена. Войдите заново.</div>
+<form th:action="@{/login}" method="post" class="stack"><label>Логин<input name="username" autocomplete="username" required autofocus maxlength="64"></label><label>Пароль<input type="password" name="password" autocomplete="current-password" required></label><button type="submit">Войти в панель →</button></form><p class="hint">Доступ предоставляется администратором вашей организации.</p></main></body></html>
